@@ -41,8 +41,27 @@
         <groupId>io.zipkin.java</groupId>
         <artifactId>zipkin-autoconfigure-ui</artifactId>
     </dependency>
+
+      <!--<dependency>-->
+          <!--<groupId>com.netflix.governator</groupId>-->
+          <!--<artifactId>governator-annotations</artifactId>-->
+          <!--<version>1.7.3</version>-->
+      <!--</dependency>-->
+
+      <!--<dependency>-->
+      <!--<groupId>com.netflix.governator</groupId>-->
+      <!--<artifactId>governator-annotations</artifactId>-->
+      <!--<version>1.10.5</version>-->
+  <!--</dependency>-->
+
+      <dependency>
+      <groupId>com.netflix.governator</groupId>
+      <artifactId>governator-annotations</artifactId>
+      <version>1.10.5</version>
+      </dependency>
   </dependencies>
-  
+
+
   	<dependencyManagement>
 		<dependencies>
 			<dependency>

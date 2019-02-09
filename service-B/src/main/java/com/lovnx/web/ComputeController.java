@@ -1,5 +1,7 @@
 package com.lovnx.web;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
@@ -34,31 +36,34 @@ public class ComputeController {
     @Autowired
     private DiscoveryClient client;
     
-//    static{
-//        Timer timer = new Timer();
-//        timer.schedule(new TimerTask(){
-//          @Override
-//          public void run() {
-//        	  num.set(0);;
-//          }
-//        }, 0, timeRound);
-//    }
+    static{
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask(){
+          @Override
+          public void run() {
+        	  num.set(0);;
+          }
+        }, 0, timeRound);
+    }
 
     @RequestMapping(value = "/add" ,method = RequestMethod.GET)
     public String add(@RequestParam Integer a, @RequestParam Integer b) {
     	
-//        num.incrementAndGet();
-//        
+        num.incrementAndGet();
+
 //        if (num.get() <= flag) {
 //	        ServiceInstance instance = client.getLocalServiceInstance();
 //	        Integer r = a + b;
 //	        logger.info("/add, host:" + instance.getHost() + ", service_id:" + instance.getServiceId() + ", result:" + r);
 //	        return "From Service-B, Result is " + r+"\nPort:"+instance.getPort();
 //        }
-//        return "调用次数超限，一分钟内最多只能调用10次！";
+//        //return "调用次数超限，一分钟内最多只能调用10次！";
+
+
     	InterfaceLimit limit = service.getEntityByPri(1);
+
     	Jedis jedis = RedisUtils.getJedis();
-    	
+
     	//redis存的超时时间
     	String timeRound_1 = jedis.get("timeRound_1");
     	//如果不存在或者是不等于数据库设置值
@@ -72,16 +77,18 @@ public class ComputeController {
     		jedis.set("num_1", String.valueOf(0));
 			jedis.expire("num_1", limit.getUnitTime());
 		}
-    	
+
     	jedis.incr("num_1");
-        
+
         if (Integer.parseInt(jedis.get("num_1")) <= limit.getUnitNum()) {
 	        ServiceInstance instance = client.getLocalServiceInstance();
 	        Integer r = a + b;
 	        logger.info("/add, host:" + instance.getHost() + ", service_id:" + instance.getServiceId() + ", result:" + r);
-	        return "From Service-B, Result is " + r+"\nPort:"+instance.getPort();
+	        return "计算结果 From Service-B, Result is " + r+"\nPort:"+instance.getPort();
         }
         return "调用次数超限！";
+
+
     }
 
 }

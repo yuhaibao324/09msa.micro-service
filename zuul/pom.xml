@@ -30,7 +30,15 @@
             <artifactId>spring-cloud-zuul-ratelimit</artifactId>
             <version>1.0.7.RELEASE</version>
         </dependency>
-        
+
+		<!-- https://mvnrepository.com/artifact/io.reactivex/rxnetty-http -->
+		<dependency>
+			<groupId>io.reactivex</groupId>
+			<artifactId>rxnetty-http</artifactId>
+			<version>0.5.2</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<dependencyManagement>

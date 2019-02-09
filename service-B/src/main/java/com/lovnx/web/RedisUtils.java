@@ -22,11 +22,11 @@ public class RedisUtils {
     private static JedisPool jedisPool = null;
 
     /** Redis服务器IP */
-    private static String host="172.16.16.72";
+    private static String host="192.168.1.100";
     /** Redis的端口号 */
     private static int port=6379;
     /** 访问密码 */
-    private static String password="lemonkz9*l";
+    private static String password="123456";
     /** 超时时间 */
     private static int timeout=10000;
     /**

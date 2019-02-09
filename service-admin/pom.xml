@@ -44,6 +44,14 @@
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.netflix.governator</groupId>
+			<artifactId>governator-annotations</artifactId>
+			<version>1.10.5</version>
+		</dependency>
+
+
 	</dependencies>
 	
 		<dependencyManagement>
