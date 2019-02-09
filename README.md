@@ -64,21 +64,8 @@ spring-cloud 微服务组件demo
   </properties>
 ```
 
-有关项目启动和配置的说明：
-
-1、最先启动的是eureka-server，并且你需要在整个测试过程中保持它的启动状态，因为它是注册中心，大多数服务必须依赖于它才能实现必要的功能。 <br>
-2、如果你想测试配置中心，可以先启动config-server，再启动service-A，按照规则来获取config-server的配置信息。 <br>
-3、如果你想测试负载均衡，则需启动ribbon、service-B、service-B2工程，在ribbon中配置自己需要的负载均衡策略，配置方法见：http://blog.csdn.net/rickiyeat/article/details/64918756 <br>
-4、如果你想测试路由，则需启动zuul工程，另外需保证service-B、service-B2、service-A其中一个或者多个工程处于启动状态，按照zuul工程的配置文件来进行相应的操作。 <br>
-5、如果你想查看spring boot admin监控台，则需启动service-admin、service-B工程，注意，spring boot admin工程需至少运行于JDK8环境。 <br>
-6、如果你想测试熔断功能，则需启动hystrix-ribbon与ribbon或者feign与hystrix-feign工程。 <br>
-7、如果你想查看断路器的监控台，请启动hystrix-dashboard（单机）和turbine（集群）工程，使用方法代码注释有写。 <br>
-8、如果你想知道服务之间的调用情况，启动sleuth、service-B2、service-A。 <br>
-
-联系方式：qq930999349
-
-
-##测试过程
+测试过程
+===
 
 1、最先启动的是eureka-server，并且你需要在整个测试过程中保持它的启动状态，因为它是注册中心，大多数服务必须依赖于它才能实现必要的功能。 <br>
 
@@ -120,13 +107,62 @@ spring-cloud 微服务组件demo
 
 	测试加法： A服务调用B服务 : http://localhost:7074/testServiceB?a=2&b=3
 
+             测试 robbin服务：  http://localhost:7071/add?a=3&b=6
+
 
 
 4、如果你想测试路由，则需启动zuul工程，另外需保证service-B、service-B2、service-A其中一个或者多个工程处于启动状态，按照zuul工程的配置文件来进行相应的操作。 <br>
+
+	
+	# routes to serviceId
+	zuul.routes.api-a.path=/api-a/**
+	zuul.routes.api-a.serviceId=service-A
+
+测     试：  [http://localhost:7073/api-a/add?a=3&b=4](http://localhost:7073/api-a/add?a=3&b=4) <br>
+测试A调用B： [http://localhost:7073/api-a/testServiceB?a=3&b=4](http://localhost:7073/api-a/testServiceB?a=3&b=4)
+
+	zuul.routes.api-b.path=/api-b/**
+	zuul.routes.api-b.serviceId=ribbon
+
+测     试：  [http://localhost:7073/api-b/add?a=3&b=4](http://localhost:7073/api-b/add?a=3&b=4)
+
+	zuul.routes.api-cx.path=/service-b/**
+	zuul.routes.api-cx.serviceId=service-b
+
+测     试： [http://localhost:7073/service-b/add?a=3&b=4](http://localhost:7073/service-b/add?a=3&b=4)
+
+	# routes to url
+	zuul.routes.api-a-url.path=/api-a-url/**
+	zuul.routes.api-a-url.url=http://localhost:7074/
+
+测     试：  [http://localhost:7073/api-a-url/add?a=3&b=4](http://localhost:7073/api-a-url/add?a=3&b=4) <br>
+测试A调用B：  [http://localhost:7073/api-a-url/testServiceB?a=3&b=4](http://localhost:7073/api-a-url/testServiceB?a=3&b=4)
+
+
 5、如果你想查看spring boot admin监控台，则需启动service-admin、service-B工程，注意，spring boot admin工程需至少运行于JDK8环境。 <br>
+
+service-admin监控地址: [http://localhost:7088/](http://localhost:7088/)
+
+
 6、如果你想测试熔断功能，则需启动hystrix-ribbon与ribbon或者feign与hystrix-feign工程。 <br>
+
+
+访问熔断地址： [http://localhost:7077/hystrix?a=3&b=4](http://localhost:7077/hystrix?a=3&b=4)
+停止服务： service-b
+访问熔断地址： [http://localhost:7077/hystrix?a=3&b=4](http://localhost:7077/hystrix?a=3&b=4)
+
+
 7、如果你想查看断路器的监控台，请启动hystrix-dashboard（单机）和turbine（集群）工程，使用方法代码注释有写。 <br>
+
+单机dashboard: [http://localhost:7080/hystrix/monitor](http://localhost:7080/hystrix/monitor)  <br>
+监控地址：[http://localhost:7077/hystrix.stream](http://localhost:7077/hystrix.stream)
+
+集群turbine： [进入hystrixdashboard页面，输入：localhost:7081/turbine.stream](localhost:7081/turbine.stream)
+
+
 8、如果你想知道服务之间的调用情况，启动sleuth、service-B2、service-A。 <br>
+	
+ZipKin服务： [http://localhost:7082/](http://localhost:7082/)
 
 
 
