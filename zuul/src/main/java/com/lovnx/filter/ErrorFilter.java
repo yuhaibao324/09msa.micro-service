@@ -39,7 +39,7 @@ public class ErrorFilter extends ZuulFilter  {
         HttpServletRequest request = ctx.getRequest();
         //HttpServletResponse response = ctx.getResponse();
         
-        log.info("进入错误异常的过滤器！");
+        log.info("进入错误异常的过滤器！ErrorFilter");
         
         log.info("===============");
         

@@ -36,7 +36,7 @@ public class FirstFilter extends ZuulFilter  {
         HttpServletRequest request = ctx.getRequest();
         //HttpServletResponse response = ctx.getResponse();
         
-        log.info("第一级过滤器！");
+        log.info("第一级过滤器！FirstFilter");
         
         log.info("===============");
 

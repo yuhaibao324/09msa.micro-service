@@ -36,7 +36,7 @@ public class ResultFilter extends ZuulFilter  {
         HttpServletRequest request = ctx.getRequest();
         //HttpServletResponse response = ctx.getResponse();
         
-        log.info("进入结果处理的过滤器！");
+        log.info("进入结果处理的过滤器！ResultFilter");
         
         log.info("===============");
 
