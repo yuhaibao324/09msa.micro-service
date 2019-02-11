@@ -69,12 +69,17 @@ spring-cloud 微服务组件demo
 
 1、最先启动的是eureka-server，并且你需要在整个测试过程中保持它的启动状态，因为它是注册中心，大多数服务必须依赖于它才能实现必要的功能。 <br>
 
-	注册中心： eureka-server:  http://localhost:7070/
+注册中心： eureka-server:  [http://localhost:7070/](http://localhost:7070/)
+
 
 2、如果你想测试配置中心，可以先启动config-server，再启动service-A，按照规则来获取config-server的配置信息。 <br>
 
-	配置中心-配置项目： config-server: http://localhost:7072/config-server/dev
-	                  启动Service-A:  http://localhost:7074/from
+配置中心-配置项目： config-server: [http://localhost:7072/config-server/dev](http://localhost:7072/config-server/dev)  <br>
+
+	查看结果： http://localhost:7072/env
+
+启动Service-A:  [http://localhost:7074/from](http://localhost:7074/from)
+
 	
 
 
