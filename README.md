@@ -80,6 +80,10 @@ spring-cloud 微服务组件demo
 
 3、如果你想测试负载均衡，则需启动ribbon、service-B、service-B2工程，在ribbon中配置自己需要的负载均衡策略，配置方法见：http://blog.csdn.net/rickiyeat/article/details/64918756 <br>
 
+
+#### 创建redis
+	micro-service\service-B\src\main\java\com\lovnx\web\RedisUtils.java
+
 #### 创建数据库
 	
 	CREATE DATABASE IF NOT EXISTS sso  DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
